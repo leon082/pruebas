@@ -23,10 +23,10 @@ public class ConsumirLeon {
     public static void main(String[] args) {
         // TODO code application logic here
         Sumar_Service servicio = new Sumar_Service();
-        Sumar suma = servicio.getSumarPort();
-        int result=suma.suma(1, 2);
+        Sumar webservice = servicio.getSumarPort();
+        int result=webservice.suma(1, 2);
         System.out.println("Resultad:" + result);
-        JOptionPane.showMessageDialog(null,suma.hello("Leon y Lizeth !!!!!... \n Tu novio es un genio asi de sencillo!!!!!"));
+        JOptionPane.showMessageDialog(null,webservice.hello("Leon y Lizeth !!!!!... \n Tu novio es un genio asi de sencillo!!!!!"));
         
         
         
