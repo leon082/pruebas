@@ -27,7 +27,7 @@
         <br/>
         <label for="modificadoPor">Modificado Por:</label>
         <input type="text" name="Modificado Por" id="modificadoPor" value="${programa.modificadopor}"/>
-        <label for="modificadoEn">Creado En :</label>
+        <label for="modificadoEn">Modificado En :</label>
         <input type="text" name="Modificado En" id="modificadoEn" value="${programa.modificadoen}"/>
 
         <br/>
