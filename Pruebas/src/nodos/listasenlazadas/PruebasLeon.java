@@ -5,14 +5,11 @@
  */
 package nodos.listasenlazadas;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  *
@@ -35,6 +32,8 @@ public class PruebasLeon {
         System.out.println(primer
                 //.getNext()
                 .getNext().getValor());*/
+      
+      /*
       ListaEnlazada lista= new ListaEnlazada();
       System.out.println("Esta Vacia: "+lista.isempty());
       
@@ -55,8 +54,54 @@ public class PruebasLeon {
       
       lista.cut(3);
       System.out.println("Index 2: " + lista.cabeza.valor);
+      
+      List<String> list = new ArrayList<String>();
+      list.add("a");
+      list.add("b");
+      list.add("c");*/
+      
+     
+     
+      try {
+			String password = generateHash("alex12345");
+			String linea ="";
+			Scanner in = new Scanner(System.in);
+			System.out.print("Ingresa clave:");
+			while(!linea.equals("x")) {
+				linea = in.next();
+				if(password.equals(generateHash(linea))) {
+					System.out.println("Clave correcta" + generateHash(linea));
+				}
+				else {
+					System.err.println("Clave fallida");
+				}
+			}
+			System.out.println("Finalizar");
+		} catch (NoSuchAlgorithmException | RuntimeException e) {
+			e.printStackTrace();
+		}
+      
+      
              
     }
+    
+     public static String generateHash(String password) throws RuntimeException, NoSuchAlgorithmException{
+
+		if (password.length() < 0) {
+			System.err.println("String to MD5 digest should be first and only parameter");
+			throw new RuntimeException();
+		}
+		String original = password;
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		md.update(original.getBytes());
+		byte[] digest = md.digest();
+		StringBuffer sb = new StringBuffer();
+		for (byte b : digest) {
+			sb.append(String.format("%02x", b & 0xff));
+		}
+
+		return sb.toString();
+	}
 
  
 
