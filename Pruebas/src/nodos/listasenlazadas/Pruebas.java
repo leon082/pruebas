@@ -5,6 +5,7 @@
  */
 package nodos.listasenlazadas;
 
+import com.sun.xml.internal.ws.developer.UsesJAXBContext;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
@@ -13,13 +14,16 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import test.use.interfaces.IPrueba;
 
 /**
  *
  * @author luis.leon
  */
 public class Pruebas {
-
+    
+    
+    public IPrueba prueba;
     /**
      * @param args the command line arguments
      */
@@ -33,7 +37,7 @@ public class Pruebas {
         }*/
              /*System.out.println("Cantidad de Registros: " + 4 + "\n"
                     + "Numeros Positivos: " + 5 + "\n"
-                    + "Numeros Negativos: " + 6 );*/
+                    + "Numeros Negativos: " + 6 );
             String sql= " SELECT E.*\n" +
                         " FROM EMPRESA E\n" +
                         " LEFT OUTER JOIN\n" +
@@ -42,9 +46,15 @@ public class Pruebas {
                         " WHERE E.ESTADO=:ESTADO\n" +
                         " ORDER BY OC.ORDENEMPRESA";
             System.out.println(sql);
+            System.out.println("REsulttado"+2*3*4);
             List<String>  list= getEnter();
-            //System.out.println(list.get(0));
+            //System.out.println(list.get(0));*/
+             init();
              
+             
+    }
+    public static void init(){
+        System.out.println(prueba.saludo());
     }
 
     public static BigInteger findAndReplace(final String holyDay) {
