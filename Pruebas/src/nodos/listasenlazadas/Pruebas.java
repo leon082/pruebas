@@ -14,6 +14,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Scanner;
+import javafx.scene.Node;
 import test.use.interfaces.IPrueba;
 
 /**
@@ -49,12 +51,67 @@ public class Pruebas {
             System.out.println("REsulttado"+2*3*4);
             List<String>  list= getEnter();
             //System.out.println(list.get(0));*/
-             init();
+             //init();
+         
+         /*   
+
+        Scanner in = new Scanner(System.in);
+        int x1 = in.nextInt();
+        int v1 = in.nextInt();
+        int x2 = in.nextInt();
+        int v2 = in.nextInt();
+        String result = kangaroo(x1, v1, x2, v2);
+        System.out.println(result);*/
+    }
+    /*
+    public Node Reverse(Node head) {
+        Node prev;
+        Node current= head;
+        Node next;
+        while(current != null){
+            
+            next=current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+        head = prev;
+        return head;
+   
+    }
+    */
+    
+        static String kangaroo(int x1, int v1, int x2, int v2) {
+             // Complete this function
+             boolean flag=true;
+             String respuesta="default";
              
+             
+            do {  
+                if((x2>x1 && v2>v1) 
+                        || (x1>x2 && v1>v2)
+                        || (v1==v2)){
+                    flag=false;
+                    respuesta="NO";
+                }else{
+                      x1+=v1;
+                      x2+=v2;
+                      if(x1==x2){
+                          flag=false;
+                          respuesta="YES";
+                      }
+               
+                }
+              
+                
+                
+            } while (flag);
+            
+            return respuesta;
              
     }
     public static void init(){
-        System.out.println(prueba.saludo());
+        //System.out.println(prueba.saludo());
     }
 
     public static BigInteger findAndReplace(final String holyDay) {
