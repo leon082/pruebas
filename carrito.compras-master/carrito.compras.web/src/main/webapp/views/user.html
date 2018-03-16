@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<div class="container col-md-6" ng-controller="UserController as ctrl" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3>
+    <div style="background: yellow;" ng-if="!ctrl.authenticated">
+        <div>
+        <form th:action="j_spring_security_check" method="post">
+        <label for="inputLogin" class="sr-only">Usuario</label>
+        <input type="text"  name="j_username"/>
+        <label for="inputPassword" class="sr-only">Contrase&ntilde;a</label>
+        <input type="password" name="j_password"/>
+
+        <input type="submit" value="Sign In"/>
+        </form>
+    </div>     
+    </div>
+    
+      
+</div>

@@ -9,12 +9,13 @@ import com.test.contacts.ws.model.Contact;
 import java.util.HashMap;
 import java.util.Map;
 import javax.ejb.Singleton;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author luis.leon
  */
-@Singleton
+@Component
 public class NoteBook {
     
    

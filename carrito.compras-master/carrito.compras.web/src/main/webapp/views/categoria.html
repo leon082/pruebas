@@ -1,0 +1,71 @@
+<div class="container" ng-controller="categoriaController as ctrl">
+    <div class="container" >
+        <encabezado></encabezado>
+    </div>
+    <div class="container" >
+        <div ng-if="ctrl.flag === 'add' || ctrl.flag === 'addFailed' || ctrl.flag === 'edit' || ctrl.flag === 'editFailed'">
+            <div class="col-xs-4 col-sm-9 col-md-3 col-lg-12">
+                <div >
+                    <div ng-if="ctrl.flag === 'edit' || ctrl.flag === 'editFailed'" class="col-sm-4" ng-class="{'required': ctrl.flag == 'add' || ctrl.flag == 'addFailed'}">
+                        <label for="cantidad">Codigo Categoria</label>
+                        <input id="coddInput" class="form-control" onkeypress="return isNumberKey(event)" placeholder="Codigo de categoria" type="number" name="codigo" ng-model="ctrl.categoriaObj.codCategoria" maxlength="20"/>
+                    </div>
+                    <div class="col-sm-4" ng-class="{'required': ctrl.flag === 'add' || ctrl.flag === 'addFailed'}">
+                        <label for="Descripcion">Descripcion</label>
+                        <input id="decripcionInput" class="form-control" placeholder="Descripcion de categoria" type="text" name="descripcion" ng-model="ctrl.categoriaObj.descripcion" maxlength="120" />
+                    </div>
+                    <div class="col-sm-4" ng-class="{'required': ctrl.flag === 'add' || ctrl.flag === 'addFailed'}">
+                        <label for="estado">Estado</label>
+                        <select id="estadoInput" class="form-control" name="estadoInput" ng-model="ctrl.categoriaObj.estado" convert-to-number required>
+                            <option value="">-- Seleccione --</option>
+                            <option ng-repeat="option in ctrl.estados" value="{{option.nombre}}">{{option.nombre}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        <hr/>
+        </div>
+        <div ng-if="ctrl.flag === 'add' || ctrl.flag === 'addFailed'">
+            <button class="btn btn-primary" type="submit" ng-click="ctrl.crearCategoria()" >Guardar Categoria</button>
+            <br><br>
+            <button class="btn btn-primary" type="submit" ng-click="ctrl.categoriaList()" >Buscar Categoria</button> 
+        </div>
+        <div class="container">
+            <div ng-if="ctrl.flag === 'edit' || ctrl.flag === 'editFailed'">
+                <br><br><br>
+                <button class="btn btn-primary" type="submit" ng-click="ctrl.guardarCambios()" >Actualizar Categoria</button> 
+                <button class="btn btn-primary" type="submit" ng-click="ctrl.categoriaList()" >Cancelar Categoria</button> 
+            </div>
+        </div>
+        <div ng-if="ctrl.flag === 'search' || ctrl.flag === 'searchFailed'">
+            <button class="btn btn-primary" type="submit" ng-click="ctrl.addCategoria()" >Agregar Categoria</button> 
+        </div>
+    </div>
+    <br>
+    <div class="row form-group" ng-if="ctrl.flag === 'search' || ctrl.flag === 'searchFailed'">
+        <div class="table-responsive" name="fullTable">
+            <table ng-table="usersTable" class="table table-hover">
+                <tr>
+                    <th>Codigo Categoria</th>
+                    <th>Descripción</th>
+                    <th>Estado</th>
+                    <th></th>
+                </tr>
+                <tbody>
+                    <tr ng-repeat="row in ctrl.tracks">
+                        <td><span ng-bind="row.codCategoria"></span></td>
+                        <td><span ng-bind="row.descripcion"></span></td>
+                         <td><span ng-bind="row.estado"></span></td>
+                        <td>
+                            <div class="btn-group btn-group-sm" role="group" style="display: flex;">
+                                <button type="button" class="btn btn-primary" ng-click="ctrl.searchById(row.codCategoria)">Editar</button>
+                                <button type="button" class="btn btn-primary" ng-if="row.estado === 'Activo'" ng-click="ctrl.inactivar(row)">Inactivar</button>
+                                <button type="button" class="btn btn-primary" ng-if="row.estado === 'Inactivo'" ng-click="ctrl.inactivar(row)">Activar</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

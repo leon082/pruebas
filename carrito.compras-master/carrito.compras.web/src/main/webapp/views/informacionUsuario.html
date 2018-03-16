@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<div class="container" ng-controller="categoriaProductoCtrl as ctrl">
+    <div class="container">
+        
+        <div class="col-sm-4" >
+            <label for="Pais">Pais</label>
+            <input id="paisInput" class="form-control" placeholder="Pais" type="text" name="Pais" ng-model="ctrl.facturaObj.pais" maxlength="120" />
+        </div>
+        <div class="col-sm-4" >
+            <label for="Departamento">Departamento</label>
+            <input id="departamentoInput" class="form-control" placeholder="Departamento" type="text" name="Departamento" ng-model="ctrl.facturaObj.departamento" maxlength="120" />
+        </div>
+        <div class="col-sm-4" >
+            <label for="Ciudad">Ciudad</label>
+            <input id="ciudadInput" class="form-control"  placeholder="Ciudad" type="text" name="Ciudad" ng-model="ctrl.facturaObj.ciudad" maxlength="120" />
+        </div>
+        <div class="col-sm-4" >
+            <label for="Direccion">Direccion</label>
+            <input id="direccionInput" class="form-control"  placeholder="Direccion" type="text" name="DireccionDireccion" ng-model="ctrl.facturaObj.direccion" maxlength="120" />
+        </div>
+        <div class="col-sm-4" >
+            <label for="TelefonoFijo">Telefono Fijo</label>
+            <input id="fijoInput" class="form-control" placeholder="Fijo" type="text" name="Fijo" ng-model="ctrl.facturaObj.telefonoFijo" maxlength="120" />
+        </div>
+        <div  class="col-sm-4" >
+            <label for="TelefonoCelular">Telefono Celular</label>
+            <input id="celular input" class="form-control" placeholder="Celular" type="text" name="Celular" ng-model="ctrl.facturaObj.telefonoCelular" maxlength="120" />
+        </div>  
+    </div>
+    <hr/>
+    <div ng-if="ctrl.facturaObj != null" style="width: 200px; margin: 0 auto;">
+        <br>
+        <button class ng-click="ctrl.finalizarCompra()">COMPRAR</button>
+    </div>  
+</div>

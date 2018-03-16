@@ -1,0 +1,168 @@
+
+<div class="container" ng-controller="productoController as ctrl">
+    {{ctrl.flag}}
+    <div class="container" >
+        <encabezado></encabezado>
+    </div>
+    <div class="container" >
+        <div >
+            <div class="col-xs-4 col-sm-9 col-md-3 col-lg-12">
+                <div >
+                    <div class="col-sm-3" ng-if="ctrl.flag === 'edit' || ctrl.flag === 'editFailed' || ctrl.flag === 'search' || ctrl.flag === 'searchFailed'">
+                        <label for="precio">Codigo</label>
+                        <input id="codigoInput" class="form-control" onkeypress="return isNumberKey(event)" placeholder="Codigo del producto" type="text" name="codigo"  ng-disabled="ctrl.flag === 'edit' || ctrl.flag === 'editFailed'" ng-model="ctrl.productoObj.codProducto" maxlength="20" />
+                    </div>
+                    <div class="col-sm-3" ng-class="{'required': ctrl.flag == 'add' || ctrl.flag == 'addFailed' || ctrl.flag == 'edit' || ctrl.flag == 'editFailed'}">
+                        <label for="nombre"> Nombre Producto </label>
+                        <input id="nombreInput" class="form-control" placeholder="Nombre del producto" type="text" name="nombre" ng-model="ctrl.productoObj.nombreProducto"  />
+                    </div>
+                    <div class="col-sm-4" ng-if="ctrl.flag === 'add' || ctrl.flag === 'addFailed' ||ctrl.flag === 'edit' || ctrl.flag === 'editFailed'" ng-class="{'required': ctrl.flag == 'add' || ctrl.flag == 'addFailed' || ctrl.flag == 'edit' || ctrl.flag == 'editFailed'}">
+                        <label for="foto">Foto</label>
+                        <input id="fotoInput" class="form-control" placeholder="Foto del producto" type="url" name="foto" ng-model="ctrl.productoObj.foto"  />
+                    </div>
+                </div>
+                <div >
+                    <div class="col-sm-4"  ng-class="{'required': ctrl.flag == 'add' || ctrl.flag == 'addFailed' || ctrl.flag == 'edit' || ctrl.flag == 'editFailed'}">
+                        <label for="Descripcion">Descripcion</label>
+                        <input id="decripcionInput" class="form-control" placeholder="Descripcion del producto" type="text" name="descripcion" ng-model="ctrl.productoObj.descProducto" maxlength="120" />
+                    </div>
+                    <div class="col-sm-4" ng-if="ctrl.flag === 'add' || ctrl.flag === 'addFailed' ||ctrl.flag === 'edit' || ctrl.flag === 'editFailed'" ng-class="{'required': ctrl.flag == 'add' || ctrl.flag == 'addFailed' || ctrl.flag == 'edit' || ctrl.flag == 'editFailed'}">
+                        <label for="cantidad">Cantidad</label>
+                        <input id="cantidadInput" class="form-control" onkeypress="return isNumberKey(event)" placeholder="Cantidad del producto" type="number" name="cantidad" ng-model="ctrl.productoObj.cantidad"  />
+                    </div>
+                    <div class="col-sm-3" ng-if="ctrl.flag === 'edit' || ctrl.flag === 'editFailed' || ctrl.flag === 'add' || ctrl.flag === 'addFailed'" ng-class="{'required': ctrl.flag == 'add' || ctrl.flag == 'addFailed' || ctrl.flag == 'edit' || ctrl.flag == 'editFailed'}">
+                        <label for="precio">Precio</label>
+                        <input id="precioInput" class="form-control" onkeypress="return isNumberKey(event)" placeholder="Precio del producto" type="number" name="precio" ng-model="ctrl.productoObj.precio"  />
+                    </div>
+                    <div class="col-sm-3" ng-if="ctrl.flag === 'search' || ctrl.flag === 'searchFailed'">
+                        <label for="precio">Precio Mayor que</label>
+                        <select id="precioInput" class="form-control" name="precioInput" ng-model="ctrl.productoObj.valorMayor" convert-to-number required>
+                            <option value="">-- Seleccione --</option>
+                            <option ng-repeat="option in ctrl.precios" value="{{option.valorMayor}}">{{option.valorMayor}}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3" ng-if="ctrl.flag === 'search' || ctrl.flag === 'searchFailed'">
+                        <label for="precio">Precio Menor que</label>
+                        <select id="precioInput" class="form-control" name="precioInput" ng-model="ctrl.productoObj.valorMenor" convert-to-number required>
+                            <option value="">-- Seleccione --</option>
+                            <option ng-repeat="option in ctrl.precios" value="{{option.valorMenor}}">{{option.valorMenor}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div >
+                    <div class="col-sm-4">
+                        <label for="estado">Estado</label>
+                        <select id="estadoInput" class="form-control" name="estadoInput" ng-model="ctrl.productoObj.estado" convert-to-number required>
+                            <option value="">-- Seleccione --</option>
+                            <option ng-repeat="option in ctrl.estados" value="{{option.nombre}}">{{option.nombre}}</option>
+                        </select>
+                    </div>
+                    
+                </div>
+            </div>
+            <hr/>
+            <div class="col-xs-4 col-sm-9 col-md-3 col-lg-12" ng-if="ctrl.flag === 'edit' || ctrl.flag === 'editFailed'"> 
+                <table ng-table="usersTable" class="table table-hover">
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Nombre</th>
+                        <th></th>
+                    </tr>
+                    <tbody>
+                        <tr ng-repeat="row in ctrl.productoObj.categorias">
+                            <td><span ng-bind="row.codCategoria"></span></td>
+                            <td><span ng-bind="row.descripcion"></span></td>
+                            <td>
+                                <form method="get">
+                                    <input ng-model="row.selected" type="checkbox" name="categoria" value={{row.selected}} ng-click="ctrl.seleccionados(row)" >
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>  
+            <div  ng-controller="categoriaController as ctrlCat" class="col-xs-4 col-sm-9 col-md-3 col-lg-12" ng-if="ctrl.flag === 'add' || ctrl.flag === 'addFailed'"> 
+                <table ng-table="usersTable" class="table table-hover">
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Nombre</th>
+                        <th></th>
+                    </tr>
+                    <tbody>
+                        <tr ng-repeat="row in ctrlCat.categoriaListByParam">
+                            <td><span ng-bind="row.codCategoria"></span></td>
+                            <td><span ng-bind="row.descripcion"></span></td>
+                            <td>
+                                <form method="get">
+                                    <input ng-model="row.selected" type="checkbox" name="categoria" value={{row.selected}} ng-click="ctrl.seleccionados(row)">
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>  
+            <hr/>
+        </div>
+        <div ng-if="ctrl.flag === 'add' || ctrl.flag === 'addFailed'">
+            <button class="btn btn-primary" type="submit" ng-click="ctrl.crearProducto()" >Guardar Producto</button> 
+            <br><br>
+            <button class="btn btn-primary" type="submit" ng-click="ctrl.reset()" >Cancelar</button> 
+        </div>
+        <div ng-if="ctrl.flag === 'search' || ctrl.flag === 'searchFailed'">
+            <button class="btn btn-primary" type="submit" ng-click="ctrl.searchByParams()" >Buscar Producto</button> 
+            <button class="btn btn-primary" type="submit" ng-click="ctrl.reset()" >Limpiar Producto</button> 
+            <button class="btn btn-primary" type="submit" ng-click="ctrl.addProducto()" >Agregar Producto</button> 
+        </div>
+        <div class="container">
+            <div ng-if="ctrl.flag === 'edit' || ctrl.flag === 'editFailed'">
+                <br><br><br>
+
+                <button class="btn btn-primary" type="submit" ng-click="ctrl.guardarCambios()" >Actualizar Producto</button> 
+            
+                <button class="btn btn-primary" type="submit" ng-click="ctrl.productoList()" >Cancelar Producto</button> 
+            </div>
+        </div>
+    </div>
+    <div class="row form-group" ng-if="ctrl.flag === 'search' || ctrl.flag === 'searchFailed'">
+        <hr/>
+        <label for="buscar">Buscar Producto</label>
+        <hr/>
+    </div>
+    <br>
+    <div class="row form-group" ng-if="ctrl.flag === 'search' || ctrl.flag === 'searchFailed'">
+        <div class="table-responsive" name="fullTable">
+            <table ng-table="usersTable" class="table table-hover">
+                <tr>
+                    <th>Foto</th>
+                    <th>Codio</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Estado</th>
+                    <th></th>
+                </tr>
+                <tbody>
+                    <tr ng-repeat="row in ctrl.tracks">
+                        <td><span ng-bind="row.foto"></span></td>
+                        <td><span ng-bind="row.codProducto"></span></td>
+                        <td><span ng-bind="row.nombreProducto"></span></td>
+                        <td><span ng-bind="row.descProducto"></span></td>
+                        <td><span ng-bind="row.precio"></span></td>
+                        <td><span ng-bind="row.cantidad"></span></td>
+                        <td><span ng-bind="row.estado"></span></td>
+                        <td>
+                            <div class="btn-group btn-group-sm" role="group" style="display: flex;">
+                                <button type="button" class="btn btn-primary" ng-click="ctrl.searchById(row.codProducto)">Editar</button>
+                                
+                                <button type="button" class="btn btn-primary" ng-if="row.estado === 'Activo'" ng-click="ctrl.inactivar(row)">Inactivar</button>
+                                <button type="button" class="btn btn-primary" ng-if="row.estado === 'Inactivo'" ng-click="ctrl.inactivar(row)">Activar</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

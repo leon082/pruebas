@@ -1,0 +1,127 @@
+<div class="container" ng-controller="categoriaProductoCtrl as ctrlCatPro" style="width: 100%">
+    <div ng-controller="productoController as ctrl" ng-if="ctrlCatPro.vista == 'compra'"> 
+        <br>
+        <div class="container">
+            <div class="col-sm-4" ng-controller="categoriaController as ctrlCat">
+                <label for="Descripcion">Categoria</label>
+                <select id="precioInput" class="form-control" name="precioInput" ng-model="ctrl.filtroBusqueda.categoriasFiltro" convert-to-number required>
+                    <option value="">-- Seleccione --</option>
+                    <option ng-repeat="option in ctrlCat.listCategoria" value="{{option.codCategoria}}">{{option.descripcion}} </option>
+                </select>
+            </div>
+            <div class="col-sm-4" >
+                <label for="Descripcion">Nombre</label>
+                <input id="decripcionInput" class="form-control" placeholder="Descripcion del producto" type="text" name="descripcion" ng-model="ctrl.filtroBusqueda.nombre" maxlength="120" />
+            </div>
+            <div class="col-sm-4" >
+                <label for="Descripcion">Descripcion</label>
+                <input id="decripcionInput" class="form-control" placeholder="Descripcion del producto" type="text" name="descripcion" ng-model="ctrl.filtroBusqueda.descripcion" maxlength="120" />
+            </div>
+            <div class="col-sm-4">
+                <label for="precio">Precio Mayor de</label>
+                <select id="precioInput" class="form-control" name="precioInput" ng-model="ctrl.filtroBusqueda.precioMayor" convert-to-number required>
+                    <option value="">-- Seleccione --</option>
+                    <option ng-repeat="option in ctrl.precios" value="{{option.valorMayor}}">{{option.valorMayor}}</option>
+                </select>
+            </div>
+            <div class="col-sm-4">
+                <label for="precio">Precio Menor de</label>
+                <select id="precioInput" class="form-control" name="precioInput" ng-model="ctrl.filtroBusqueda.precioMenor" convert-to-number required>
+                    <option value="">-- Seleccione --</option>
+                    <option ng-repeat="option in ctrl.precios" value="{{option.valorMenor}}">{{option.valorMenor}}</option>
+                </select>
+            </div>
+            <div class="col-sm-4">
+                <br>
+                <button class="btn btn-primary" type="submit" ng-click="ctrl.productosFiltro()" >Buscar</button>
+                <button class="btn btn-primary" type="submit" ng-click="ctrl.resetFiltro()" >Limpiar</button>
+            </div>
+        </div>
+        <hr/>
+        <div class="col-md-12" >
+            <button class="btn btn-primary" type="submit" ng-click="ctrlCatPro.modal()"><!--span class="glyphicon glyphicon-shopping-cart"></span-->CARRITO DE COMPRAS</button>
+            <div ng-if="ctrlCatPro.productoSeleccionado.length > 0 && ctrlCatPro.flag == 'false'">
+                <button class="btn btn-primary" type="submit" ng-click="ctrlCatPro.comprar()" >COMPRAR</button> 
+
+            </div>
+            <div>
+            <div ng-if="ctrl.flag=='search' && ctrlCatPro.flag == 'true'" class="col-md-2" ng-repeat="row in ctrl.productosFiltroList" style="margin: 10px; height: 1%;  border: green 2px solid; " >
+                <span>{{row.nombreProducto}}</span>
+                <br>
+                <img onerror="this.src='http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';" ng-src="{{row.foto}}" alt="foto" width="100px" height="100px"/> 
+                <div>Costo: {{row.precio}}</div>
+                <div>Cantidad Disponible: {{row.cantidad}}</div>
+                <div>
+                    <button ng-if="!row.selected" class="btn btn-primary" type="submit" ng-click="ctrlCatPro.productosSeleccionados(row)" >Comprar</button> 
+                    <label for="Descripcion">Cantidad a Comprar</label>
+                    <input id="decripcionInput" class="form-control" onkeypress="return isNumberKey(event)" placeholder="Descripcion del producto" type="text" name="descripcion" ng-model="row.cantidadCompra" maxlength="120" />
+                    {{row.cantidadCompra}}
+                </div>
+                <button ng-if="row.selected" class="btn btn-primary" type="submit" ng-click="ctrlCatPro.removeProductos(row)" >Eliminar</button>
+                <br/>
+
+                <br>
+            </div>            
+            
+
+            <div class="col-md-2" ng-if="ctrlCatPro.flag == 'false'"  ng-repeat="row in ctrlCatPro.productoSeleccionado" style="margin: 10px; height: 1%;  border: green 2px solid; ">
+                <span>{{row.nombreProducto}}</span>
+                <label>{{row.descProducto}}</label>
+                <br>
+                <img onerror="this.src='http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';" ng-src="{{row.foto}}" alt="foto" width="100px" height="100px"/> 
+                <div>Costo: {{row.precio}}</div>
+                <div>Cantidad Disponible: {{row.cantidad}}</div>
+                <div>
+                    <button  ng-if="!row.selected" class="btn btn-primary" type="submit" ng-click="ctrlCatPro.productosSeleccionados(row)" >Comprar</button>--> 
+                    <label for="Descripcion">Cantidad a Comprar</label>
+                    <input id="decripcionInput" class="form-control" onkeypress="return isNumberKey(event)" placeholder="Descripcion del producto" type="text" name="descripcion" ng-model="row.cantidadCompra" maxlength="120" />
+                </div>
+                <button ng-if="row.selected" class="btn btn-primary" type="submit" ng-click="ctrlCatPro.removeProductos(row)" >Eliminar</button>
+                <br/>
+
+                <br>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="ctrlCatPro.vista == 'factura'">
+        <div class="container">
+            <div class="container">
+
+                <div class="col-sm-4" >
+                    <label for="Pais">Pais</label>
+                    <input id="paisInput" class="form-control" placeholder="Pais" type="text" name="Pais" ng-model="ctrlCatPro.facturaObj.pais" maxlength="120" />
+                </div>
+                <div class="col-sm-4" >
+                    <label for="Departamento">Departamento</label>
+                    <input id="departamentoInput" class="form-control" placeholder="Departamento" type="text" name="Departamento" ng-model="ctrlCatPro.facturaObj.departamento" maxlength="120" />
+                </div>
+                <div class="col-sm-4" >
+                    <label for="Ciudad">Ciudad</label>
+                    <input id="ciudadInput" class="form-control"  placeholder="Ciudad" type="text" name="Ciudad" ng-model="ctrlCatPro.facturaObj.ciudad" maxlength="120" />
+                </div>
+                <div class="col-sm-4" >
+                    <label for="Direccion">Direccion</label>
+                    <input id="direccionInput" class="form-control"  placeholder="Direccion" type="text" name="DireccionDireccion" ng-model="ctrlCatPro.facturaObj.direccion" maxlength="120" />
+                </div>
+                <div class="col-sm-4" >
+                    <label for="TelefonoFijo">Telefono Fijo</label>
+                    <input id="fijoInput" class="form-control" placeholder="Fijo" type="text" name="Fijo" ng-model="ctrlCatPro.facturaObj.telefonoFijo" maxlength="120" />
+                </div>
+                <div  class="col-sm-4" >
+                    <label for="TelefonoCelular">Telefono Celular</label>
+                    <input id="celular input" class="form-control" placeholder="Celular" type="text" name="Celular" ng-model="ctrlCatPro.facturaObj.telefonoCelular" maxlength="120" />
+                </div>  
+            </div>
+            <hr/>
+            <div style="width: 200px; margin: 0 auto;">
+                <br>
+                <button class ng-click="ctrlCatPro.finalizarCompra()">COMPRAR</button>
+            </div>  
+        </div>
+    </div>
+</div>
+
+
+
+
