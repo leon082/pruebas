@@ -11,20 +11,12 @@ package com.test.contacts.ws.model;
  */
 public class Contact {
     
-    Long id;
+    
+    long id;
     String firstName;
     String lastName;
     String phoneNumber;
     String email;
-
-    public Contact(Long id, String firstName, String lastName, String phoneNumber, String email) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-    }
-    
     
     public Long getId() {
         return id;

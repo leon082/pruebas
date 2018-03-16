@@ -7,8 +7,9 @@ package com.test.contacts.ws.controller;
 
 import com.test.contacts.ws.model.Contact;
 import com.test.contacts.ws.noteBook.NoteBook;
-import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,16 +26,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ContactsController {
     
+    @Autowired
     private NoteBook notes;
-    
-    @PostConstruct()
-    public void init() {
-        notes = new NoteBook();
-    }
-    
-    @RequestMapping()
-    public ResponseEntity<List<Contact>> getAllContacts() {        
-        ResponseEntity<List<Contact>> response = new ResponseEntity<>(notes.list(), HttpStatus.OK);
+     
+    @RequestMapping(value = "/")
+    public ResponseEntity<Map<String, Contact>> getAllContacts() {        
+        Map<String, Contact> map = notes.getContacts();
+        ResponseEntity<Map<String, Contact>> response = new ResponseEntity<>(map, HttpStatus.OK);
         return response;
     }
     

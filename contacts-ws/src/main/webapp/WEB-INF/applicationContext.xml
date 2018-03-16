@@ -17,6 +17,8 @@
     <context:component-scan base-package="com.test.contacts.ws" />
     <context:annotation-config />
     <mvc:annotation-driven/>
+    <bean id="notes" class="com.test.contacts.ws.noteBook.NoteBook"></bean>      
+    
     
     <!--
     <context:property-placeholder location="classpath:database.properties" />
