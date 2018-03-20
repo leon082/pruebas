@@ -30,6 +30,7 @@ public class ContactsController {
 
     @RequestMapping(value = "/")
     public ResponseEntity<List<LL_Contact>> getAllContacts() {
+        
         List<LL_Contact> list = contactClient.loadAll();
         ResponseEntity<List<LL_Contact>> response = new ResponseEntity<>(list, HttpStatus.OK);
         return response;
@@ -37,6 +38,7 @@ public class ContactsController {
 
     @RequestMapping(value = "/getContactByID/{id}", method = RequestMethod.GET)
     public ResponseEntity<LL_Contact> getContact(@PathVariable String id) {
+        
         ResponseEntity<LL_Contact> response = new ResponseEntity<>(contactClient.load(Long.parseLong(id)), HttpStatus.OK);
         return response;
     }
@@ -44,7 +46,6 @@ public class ContactsController {
     @RequestMapping(value = "/saveContact", method = RequestMethod.POST)
     public String addContact(@RequestBody LL_Contact contact) {
         return contactClient.save(contact);
-       
 
     }
 
@@ -52,13 +53,12 @@ public class ContactsController {
     public String deleteContact(@PathVariable String id) {
 
         return contactClient.delete(Long.parseLong(id));
-        
+
     }
 
-    
     @RequestMapping(value = "/updateContact", method = RequestMethod.PUT)
     public ResponseEntity<LL_Contact> updateContact(@RequestBody LL_Contact contact) {
-        
+
         ResponseEntity<LL_Contact> response = new ResponseEntity<>(contactClient.update(contact), HttpStatus.OK);
         return response;
     }
