@@ -18,9 +18,7 @@
     <context:annotation-config />
     <mvc:annotation-driven/>
     
-    <context:property-placeholder location="classpath:database.properties" />
-
-    <import resource="classpath:datasource-context.xml" />
+    
         
     
     

@@ -5,9 +5,9 @@
  */
 package com.test.contactsbd.ws.controller;
 
+import com.test.contactsbd.ws.client.ContactClient;
 import com.test.contactsbd.ws.model.LL_Contact;
-import java.util.Map;
-import javax.annotation.PostConstruct;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,42 +24,42 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/contacts")
 @RestController
 public class ContactsController {
-    
-    
-     
+
+    @Autowired
+    ContactClient contactClient;
+
     @RequestMapping(value = "/")
-    public ResponseEntity<Map<String, LL_Contact>> getAllContacts() {        
-       // Map<String, LL_Contact> map = notes.getContacts();
-       // ResponseEntity<Map<String, LL_Contact>> response = new ResponseEntity<>(map, HttpStatus.OK);
-        return null;
+    public ResponseEntity<List<LL_Contact>> getAllContacts() {
+        List<LL_Contact> list = contactClient.loadAll();
+        ResponseEntity<List<LL_Contact>> response = new ResponseEntity<>(list, HttpStatus.OK);
+        return response;
     }
-    
+
     @RequestMapping(value = "/getContactByID/{id}", method = RequestMethod.GET)
     public ResponseEntity<LL_Contact> getContact(@PathVariable String id) {
-        //ResponseEntity<Contact> response = new ResponseEntity<>(notes.get(id), HttpStatus.OK);
-        return null;
+        ResponseEntity<LL_Contact> response = new ResponseEntity<>(contactClient.load(Long.parseLong(id)), HttpStatus.OK);
+        return response;
     }
-    
+
     @RequestMapping(value = "/saveContact", method = RequestMethod.POST)
     public String addContact(@RequestBody LL_Contact contact) {
-        
-        return"";
-                //("Guardado el contacto " +notes.save(contact.getFirstName(), contact));
-        
+        return contactClient.save(contact);
+       
+
     }
-    /*
-    @RequestMapping(value = "/", method = RequestMethod.PUT)
-    public ResponseEntity<Contact> updateContact() {
-        LL_Contact contact = new LL_Contact(1L, "Maria", "Perea", "315-897452", "correo@gmail.com");
-        ResponseEntity<Contact> response = new ResponseEntity<Contact>(contact, HttpStatus.OK);
-        return response;
-    }*/
-    
+
     @RequestMapping(value = "/deleteContact/{id}", method = RequestMethod.DELETE)
-    public String deleteContact(@PathVariable String name) {
+    public String deleteContact(@PathVariable String id) {
+
+        return contactClient.delete(Long.parseLong(id));
         
-        //notes.remove(name);
-        return "Eliminado el contacto "+name;
     }
+
     
+    @RequestMapping(value = "/updateContact", method = RequestMethod.PUT)
+    public ResponseEntity<LL_Contact> updateContact(@RequestBody LL_Contact contact) {
+        
+        ResponseEntity<LL_Contact> response = new ResponseEntity<>(contactClient.update(contact), HttpStatus.OK);
+        return response;
+    }
 }

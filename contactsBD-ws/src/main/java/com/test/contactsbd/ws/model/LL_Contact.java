@@ -9,6 +9,7 @@ package com.test.contactsbd.ws.model;
  *
  * @author luis.leon
  */
+
 public class LL_Contact {
     
     
