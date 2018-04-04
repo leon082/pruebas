@@ -1,0 +1,107 @@
+<div #fields class="table-container bottom-spacer">
+  <mat-list>
+    <div class="container-fluid">
+      <div #inputFields class="bottom-spacer">
+
+        <mat-form-field class="col-md-4 margin-left-min">
+          <input matInput #nombre maxlength="20" placeholder="Nombre" [(ngModel)]="contact.firstName">
+          <mat-hint align="end">{{nombre.value?.length || 0}}/20</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-4 margin-left-min">
+          <input matInput #apellido maxlength="20" placeholder="Apellido" [(ngModel)]="contact.lastName">
+          <mat-hint align="end">{{apellido.value?.length || 0}}/10</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-4 margin-left-min">
+          <input matInput #telefono maxlength="10" placeholder="Telefono" [(ngModel)]="contact.phoneNumber">
+          <mat-hint align="end">{{telefono.value?.length || 0}}/10</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-4 margin-left-min">
+          <input matInput #email maxlength="20" placeholder="Email" [(ngModel)]="contact.email">
+          <mat-hint align="end">{{email.value?.length || 0}}/20</mat-hint>
+        </mat-form-field>
+
+        <button *ngIf="isValidForm()" mat-raised-button color="primary" class="color-green" (click)="saveContact()">Guardar
+          <i class="fas fa-save"></i>
+        </button>
+
+        <!--<mat-form-field class="col-md-4 margin-left-min"  >
+                        <input matInput  #resultado  placeholder="Resultado" [(ngModel)]="result" disabled>                     
+                      </mat-form-field>-->
+      </div>
+    </div>
+  </mat-list>
+
+</div>
+
+<div class="table-container mat-elevation-z8 bottom-spacer" *ngIf="!isDataEmpty()">
+  <div class="table-header">
+    <mat-list>
+      <mat-list-item>Contactos Almacenados</mat-list-item>
+      <mat-divider class="bottom-spacer"></mat-divider>
+    </mat-list>
+  </div>
+
+  <mat-table [dataSource]="dataSource" class="bottom-spacer">
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+
+    <!-- NOMBRE Column -->
+    <ng-container matColumnDef="nombre">
+      <mat-header-cell *matHeaderCellDef>NOMBRE </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
+    </ng-container>
+
+    <!-- APELLIDO Column -->
+    <ng-container matColumnDef="apellido">
+      <mat-header-cell *matHeaderCellDef>APELLIDO </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+    </ng-container>
+
+
+    <!-- TELEFONO Column -->
+    <ng-container matColumnDef="telefono">
+      <mat-header-cell *matHeaderCellDef>TELEFONO </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.phoneNumber}} </mat-cell>
+    </ng-container>
+
+    <!-- CORREO Column -->
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef>CORREO </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+    </ng-container>
+
+    <!-- BUTTONS Column -->
+    <ng-container matColumnDef="acciones">
+      <mat-header-cell *matHeaderCellDef>ACCIONES</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-raised-button color="primary" (click)="loadContact(row)">Editar
+          <i class="fas fa-edit"></i>
+        </button>
+
+        <button mat-raised-button color="warn" (click)="deleteContact(row)">Eliminar
+          <i class="fas fa-trash-alt"></i>
+        </button>
+
+      </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row>
+    </mat-row>
+  </mat-table>
+
+
+</div>
+
+<div class="container" *ngIf="isDataEmpty()">
+  <mat-card>No se encontraron registros</mat-card>
+</div>
