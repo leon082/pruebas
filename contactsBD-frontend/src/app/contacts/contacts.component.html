@@ -19,7 +19,8 @@
         </mat-form-field>
 
         <mat-form-field class="col-md-4 margin-left-min">
-          <input matInput #email maxlength="20" placeholder="Email" [(ngModel)]="contact.email">
+          <input matInput #email maxlength="20" placeholder="Email" [(ngModel)]="contact.email" [formControl]="fcEmail">
+          <mat-error *ngIf="fcEmail.invalid">{{getErrorEmail()}}</mat-error>
           <mat-hint align="end">{{email.value?.length || 0}}/20</mat-hint>
         </mat-form-field>
 

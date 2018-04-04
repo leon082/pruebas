@@ -35,19 +35,24 @@ export class ContactsComponent implements OnInit {
 
 
   // Form Validator
-  fcDesc: FormControl;
+  fcEmail: FormControl;
   fcEstado: FormControl;
 
   constructor(private contactsService: ContactsService, public plantillaDialog: MatDialog) { }
 
   ngOnInit() {
-    this.fcDesc = new FormControl('', [Validators.required]);
+    this.fcEmail = new FormControl('', [Validators.email]);
     this.fcEstado = new FormControl('', [Validators.required]);
     this.contact = new Contact();
     this.result="";
 
     this.getAllContacts();
   }
+
+  getErrorEmail(): string {
+    return this.fcEmail.hasError('email') ? 'Tipo de correo no valido' : '';
+  }
+
 
   getAllContacts(): void {
     this.contactsService.getAllContacts().subscribe(
@@ -160,7 +165,7 @@ export class ContactsComponent implements OnInit {
     this.add = false;
     this.edit = false;
 
-    this.fcDesc = new FormControl('', [Validators.required]);
+    this.fcEmail = new FormControl('', [Validators.email]);
     this.fcEstado = new FormControl('', [Validators.required]);
   }
 
