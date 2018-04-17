@@ -152,7 +152,7 @@ public class Pruebas {
         System.out.println(total);
         int imprimir= (int) Math.round (total);
         System.out.println("The total meal cost is "+imprimir+" dollars.");*/
-   
+   /*
    int a=5;
    int b=2;
    
@@ -162,7 +162,24 @@ public class Pruebas {
    a=a-b;
    
    System.out.println("Valor de A= "+a);
-   System.out.println("Valor de B= "+b);
+   System.out.println("Valor de B= "+b);*/
+   
+   /* Calendar cal= Calendar.getInstance();
+               String cal_for_month = (cal.get(Calendar.MONTH)+"").length() == 1 ?("0"+cal.get(Calendar.MONTH)+""):(cal.get(Calendar.MONTH)+"");
+               String cal_for_year = cal.get(Calendar.YEAR)+"";
+                String cal_for_day =(cal.get(Calendar.DAY_OF_MONTH)+"").length() == 1 ?("0"+cal.get(Calendar.DAY_OF_MONTH)):(cal.get(Calendar.DAY_OF_MONTH)+""); 
+                long result= Long.parseLong(cal_for_day+cal_for_month+cal_for_year);
+                System.out.println("REsultado-> "+result);*/
+   /*String error ="Error en Descargue y Amarre de Chequera: Error. ";
+   error += "Error en Nota Debito: Error nota. ";
+   Long.parseLong("395920.0");
+   System.out.println(error);*/
+    /*String valorTemp="39424.0";
+                double debitoTemp = Double.parseDouble(valorTemp.replaceAll(",", ""));
+               long valorDebito = (new Double(debitoTemp).longValue());
+               */
+    
+               System.out.println("Valor "+Long.parseLong("395920"));
    
    
    
