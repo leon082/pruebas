@@ -38,7 +38,7 @@ export class ContactsComponent implements OnInit {
   // Form Validator
   fcEmail: FormControl;
   fcEstado: FormControl;
-  foods = [
+  states = [
     {value: '1', viewValue: 'Activo'},
     {value: '2', viewValue: 'Inactivo'},
   ]
@@ -185,6 +185,8 @@ export class ContactsComponent implements OnInit {
 
     this.fcEmail = new FormControl('', [Validators.email]);
     this.fcEstado = new FormControl('', [Validators.required]);
+
+    this.contacEstado=null;
   }
 
 }

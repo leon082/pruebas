@@ -26,8 +26,8 @@
 
         <mat-form-field>
           <mat-select placeholder="Estado" [(ngModel)]="contacEstado" (click)="getState()">
-            <mat-option *ngFor="let food of foods" [(value)]="food.value">
-              {{ food.viewValue }}
+            <mat-option *ngFor="let state of states" [(value)]="state.value">
+              {{ state.viewValue }}
             </mat-option>
           </mat-select>
         </mat-form-field>
