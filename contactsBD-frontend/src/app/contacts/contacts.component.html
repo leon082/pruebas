@@ -24,6 +24,14 @@
           <mat-hint align="end">{{email.value?.length || 0}}/20</mat-hint>
         </mat-form-field>
 
+        <mat-form-field>
+          <mat-select placeholder="Estado" [(ngModel)]="contacEstado" (click)="getState()">
+            <mat-option *ngFor="let food of foods" [(value)]="food.value">
+              {{ food.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
         <button *ngIf="isValidForm()" mat-raised-button color="primary" class="color-green" (click)="saveContact()">Guardar
           <i class="fas fa-save"></i>
         </button>
@@ -81,15 +89,17 @@
     <!-- BUTTONS Column -->
     <ng-container matColumnDef="acciones">
       <mat-header-cell *matHeaderCellDef>ACCIONES</mat-header-cell>
+
       <mat-cell *matCellDef="let row">
-        <button mat-raised-button color="primary" (click)="loadContact(row)">Editar
-          <i class="fas fa-edit"></i>
-        </button>
-
-        <button mat-raised-button color="warn" (click)="deleteContact(row)">Eliminar
-          <i class="fas fa-trash-alt"></i>
-        </button>
-
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button mat-raised-button color="primary" (click)="loadContact(row)">Editar
+                <i class="fas fa-edit"></i>
+              </button>
+      
+              <button mat-raised-button color="warn" (click)="deleteContact(row)" [(disabled)]="row.flag">Eliminar
+                <i class="fas fa-trash-alt"></i>
+              </button>
+        </div>
       </mat-cell>
     </ng-container>
 

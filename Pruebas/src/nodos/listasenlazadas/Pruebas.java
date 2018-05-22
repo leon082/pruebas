@@ -179,7 +179,11 @@ public class Pruebas {
                long valorDebito = (new Double(debitoTemp).longValue());
                */
     
-               System.out.println("Valor "+Long.parseLong("395920"));
+              // System.out.println("Valor "+Long.parseLong("395920"));
+              String valor = "s ,s ,s ";
+              String [] pila= valor.split(",");
+              
+              System.out.println(pila[0].trim());
    
    
    

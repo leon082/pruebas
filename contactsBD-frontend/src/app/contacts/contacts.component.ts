@@ -28,6 +28,7 @@ export class ContactsComponent implements OnInit {
   search: boolean;
   edit: boolean;
   add: boolean;
+  
 
   //resultado
   result:String;
@@ -37,6 +38,11 @@ export class ContactsComponent implements OnInit {
   // Form Validator
   fcEmail: FormControl;
   fcEstado: FormControl;
+  foods = [
+    {value: '1', viewValue: 'Activo'},
+    {value: '2', viewValue: 'Inactivo'},
+  ]
+  contacEstado:any;
 
   constructor(private contactsService: ContactsService, public plantillaDialog: MatDialog) { }
 
@@ -45,8 +51,14 @@ export class ContactsComponent implements OnInit {
     this.fcEstado = new FormControl('', [Validators.required]);
     this.contact = new Contact();
     this.result="";
+    //this.contacEstado="1";
 
     this.getAllContacts();
+    
+  }
+
+  getState(){
+    console.log("Valro del estado -> "+ this.contacEstado);
   }
 
   getErrorEmail(): string {
@@ -70,6 +82,7 @@ export class ContactsComponent implements OnInit {
     } else {
       this.editService();
     }
+    
 
   }
   editService(): void {
@@ -104,6 +117,8 @@ export class ContactsComponent implements OnInit {
       }
     );
   }
+
+  
   deleteContact(row): void {
     this.contactsService.deleteContact(row.id).subscribe(
       success => {
@@ -127,7 +142,10 @@ export class ContactsComponent implements OnInit {
     this.contact.lastName = row.lastName;
     this.contact.phoneNumber = row.phoneNumber;
     this.contact.email = row.email;
+    row.flag=true;
   }
+
+ 
   isDataEmpty(): boolean {
     return this.ELEMENT_DATA.length == 0;
   }
