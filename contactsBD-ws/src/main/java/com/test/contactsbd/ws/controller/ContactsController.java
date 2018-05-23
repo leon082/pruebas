@@ -6,7 +6,9 @@
 package com.test.contactsbd.ws.controller;
 
 import com.test.contactsbd.ws.client.ContactClient;
+import com.test.contactsbd.ws.client.EstadoClient;
 import com.test.contactsbd.ws.model.LL_Contact;
+import com.test.contactsbd.ws.model.LL_Estadoscontact;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,6 +29,9 @@ public class ContactsController {
 
     @Autowired
     ContactClient contactClient;
+    
+    @Autowired
+    EstadoClient estadoCient;
 
     @RequestMapping(value = "/")
     public ResponseEntity<List<LL_Contact>> getAllContacts() {
@@ -40,6 +45,13 @@ public class ContactsController {
     public ResponseEntity<LL_Contact> getContact(@PathVariable String id) {
         
         ResponseEntity<LL_Contact> response = new ResponseEntity<>(contactClient.load(Long.parseLong(id)), HttpStatus.OK);
+        return response;
+    }
+    
+    @RequestMapping(value = "/getAllEstates", method = RequestMethod.GET)
+    public ResponseEntity<List<LL_Estadoscontact>> getContact() {
+        List<LL_Estadoscontact> list = estadoCient.loadAll();
+        ResponseEntity<List<LL_Estadoscontact>> response = new ResponseEntity<>(list, HttpStatus.OK);
         return response;
     }
 

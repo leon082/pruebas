@@ -37,8 +37,8 @@ public class LL_ContactDAO implements Dao<LL_Contact> {
     public boolean save(LL_Contact t) {
 
         try {
-            String sql = "insert into LL_Contact (ID,FIRSTNAME,LASTNAME,EMAIL,PHONENUMBER) values (SQ_LL_CONTACT.nextval, ?, ?, ?,?)";
-            jdbcTemplate.update(sql, t.getFirstName(), t.getLastName(), t.getEmail(), t.getPhoneNumber());
+            String sql = "insert into LL_Contact (ID,FIRSTNAME,LASTNAME,EMAIL,PHONENUMBER,ESTADO) values (SQ_LL_CONTACT.nextval, ?, ?, ?,?,?)";
+            jdbcTemplate.update(sql, t.getFirstName(), t.getLastName(), t.getEmail(), t.getPhoneNumber(),t.getEstado());
             return true;
         } catch (Exception e) {
             return false;
@@ -71,8 +71,8 @@ public class LL_ContactDAO implements Dao<LL_Contact> {
     @Override
     public boolean update(LL_Contact t) {
         try {
-            String sql = "UPDATE LL_CONTACT set FIRSTNAME=?, LASTNAME =?,EMAIL=?,PHONENUMBER=? where id=?";
-            jdbcTemplate.update(sql, t.getFirstName(), t.getLastName(), t.getEmail(), t.getPhoneNumber(), t.getId());
+            String sql = "UPDATE LL_CONTACT set FIRSTNAME=?, LASTNAME =?,EMAIL=?,PHONENUMBER=? ,ESTADO=? where id=?";
+            jdbcTemplate.update(sql, t.getFirstName(), t.getLastName(), t.getEmail(), t.getPhoneNumber(),t.getEstado(), t.getId());
             return true;
         } catch (Exception e) {
             return false;
@@ -96,6 +96,7 @@ public class LL_ContactDAO implements Dao<LL_Contact> {
             ll_Contact.setLastName(resultSet.getString("LASTNAME"));
             ll_Contact.setEmail(resultSet.getString("EMAIL"));
             ll_Contact.setPhoneNumber(resultSet.getString("PHONENUMBER"));
+            ll_Contact.setEstado(resultSet.getLong("ESTADO"));
             return ll_Contact;
         }
     }

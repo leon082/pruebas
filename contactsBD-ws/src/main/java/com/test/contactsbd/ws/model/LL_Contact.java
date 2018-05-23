@@ -18,6 +18,7 @@ public class LL_Contact {
     String lastName;
     String phoneNumber;
     String email;
+    long estado;
     
     public Long getId() {
         return id;
@@ -58,6 +59,19 @@ public class LL_Contact {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public long getEstado() {
+        return estado;
+    }
+
+    public void setEstado(long estado) {
+        this.estado = estado;
+    }
+
+   
+    
+    
+    
     
     
     

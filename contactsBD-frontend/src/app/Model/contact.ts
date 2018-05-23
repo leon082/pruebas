@@ -4,7 +4,9 @@ firstName:string;
  lastName:string;
  phoneNumber:string;
  email:string;
+ estado:number;
  flag:boolean;
+
 
 
 
@@ -15,5 +17,6 @@ constructor(){
     this.phoneNumber = null;
     this.email = null;
     this.flag=false;
+    this.estado=null;
 }
 }

@@ -3,6 +3,7 @@ import { ContactsService } from '../Services/contacts.service';
 import { tap } from 'rxjs/operators';
 import { MatTableDataSource, MatDialog } from '@angular/material';
 import { Contact } from '../model/contact';
+import { State } from '../model/state';
 import { FormControl, Validators } from '@angular/forms';
 
 
@@ -15,7 +16,7 @@ export class ContactsComponent implements OnInit {
 
   // Table elements
   ELEMENT_DATA: Contact[] = [];
-  displayedColumns = ['id', 'nombre', 'apellido', 'telefono', 'email', 'acciones'];
+  displayedColumns = ['id', 'nombre', 'apellido', 'telefono', 'email', 'estado','acciones'];
   dataSource: MatTableDataSource<Contact>;
 
   // Search object
@@ -38,11 +39,8 @@ export class ContactsComponent implements OnInit {
   // Form Validator
   fcEmail: FormControl;
   fcEstado: FormControl;
-  states = [
-    {value: '1', viewValue: 'Activo'},
-    {value: '2', viewValue: 'Inactivo'},
-  ]
-  contacEstado:any;
+  states: State[]=[];
+  
 
   constructor(private contactsService: ContactsService, public plantillaDialog: MatDialog) { }
 
@@ -50,15 +48,28 @@ export class ContactsComponent implements OnInit {
     this.fcEmail = new FormControl('', [Validators.email]);
     this.fcEstado = new FormControl('', [Validators.required]);
     this.contact = new Contact();
+    
     this.result="";
     //this.contacEstado="1";
 
     this.getAllContacts();
+    this.getAllStates();
     
   }
 
+  getAllStates(): void {
+    this.contactsService.getallStates().subscribe(
+      success => {
+        this.states = success;
+        
+      }, err => {
+        console.log("ERROR GETALL ", err);
+      }
+    );
+  }
+
   getState(){
-    console.log("Valro del estado -> "+ this.contacEstado);
+    //console.log("Valro del estado -> "+ this.contacEstado);
   }
 
   getErrorEmail(): string {
@@ -142,6 +153,7 @@ export class ContactsComponent implements OnInit {
     this.contact.lastName = row.lastName;
     this.contact.phoneNumber = row.phoneNumber;
     this.contact.email = row.email;
+    this.contact.estado = row.estado;
     row.flag=true;
   }
 
@@ -178,6 +190,7 @@ export class ContactsComponent implements OnInit {
     this.contact.lastName = null;
     this.contact.phoneNumber = null;
     this.contact.email = null;
+    this.contact.estado=null;
 
     this.search = true;
     this.add = false;
@@ -186,7 +199,7 @@ export class ContactsComponent implements OnInit {
     this.fcEmail = new FormControl('', [Validators.email]);
     this.fcEstado = new FormControl('', [Validators.required]);
 
-    this.contacEstado=null;
+    
   }
 
 }

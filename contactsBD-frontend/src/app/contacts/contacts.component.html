@@ -25,12 +25,13 @@
         </mat-form-field>
 
         <mat-form-field>
-          <mat-select placeholder="Estado" [(ngModel)]="contacEstado" (click)="getState()">
-            <mat-option *ngFor="let state of states" [(value)]="state.value">
-              {{ state.viewValue }}
+          <mat-select placeholder="Estado" [(ngModel)]="contact.estado">
+            <mat-option *ngFor="let state of states" [(value)]="state.llave">
+              {{ state.valor }}
             </mat-option>
           </mat-select>
         </mat-form-field>
+
 
         <button *ngIf="isValidForm()" mat-raised-button color="primary" class="color-green" (click)="saveContact()">Guardar
           <i class="fas fa-save"></i>
@@ -86,19 +87,32 @@
       <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
     </ng-container>
 
+    <!-- ESTADO Column -->
+    <ng-container matColumnDef="estado">
+      <mat-header-cell *matHeaderCellDef>ESTADO </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-select placeholder="Estado" [(value)]="element.estado" (click)="getState()" disabled="true">
+          <mat-option *ngFor="let state of states" [(value)]="state.llave">
+            {{ state.valor }}
+          </mat-option>
+        </mat-select>
+      </mat-cell>
+    </ng-container>
+
+
     <!-- BUTTONS Column -->
     <ng-container matColumnDef="acciones">
       <mat-header-cell *matHeaderCellDef>ACCIONES</mat-header-cell>
 
       <mat-cell *matCellDef="let row">
         <div class="btn-group" role="group" aria-label="Basic example">
-            <button mat-raised-button color="primary" (click)="loadContact(row)">Editar
-                <i class="fas fa-edit"></i>
-              </button>
-      
-              <button mat-raised-button color="warn" (click)="deleteContact(row)" [(disabled)]="row.flag">Eliminar
-                <i class="fas fa-trash-alt"></i>
-              </button>
+          <button mat-raised-button color="primary" (click)="loadContact(row)">Editar
+            <i class="fas fa-edit"></i>
+          </button>
+
+          <button mat-raised-button color="warn" (click)="deleteContact(row)" [(disabled)]="row.flag">Eliminar
+            <i class="fas fa-trash-alt"></i>
+          </button>
         </div>
       </mat-cell>
     </ng-container>
