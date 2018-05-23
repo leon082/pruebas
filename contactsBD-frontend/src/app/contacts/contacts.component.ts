@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ContactsService } from '../Services/contacts.service';
 import { tap } from 'rxjs/operators';
-import { MatTableDataSource, MatDialog } from '@angular/material';
+import { MatTableDataSource, MatDialog, MatIconModule } from '@angular/material';
 import { Contact } from '../model/contact';
 import { State } from '../model/state';
 import { FormControl, Validators } from '@angular/forms';
@@ -68,9 +68,7 @@ export class ContactsComponent implements OnInit {
     );
   }
 
-  getState(){
-    //console.log("Valro del estado -> "+ this.contacEstado);
-  }
+
 
   getErrorEmail(): string {
     return this.fcEmail.hasError('email') ? 'Tipo de correo no valido' : '';
@@ -158,7 +156,8 @@ export class ContactsComponent implements OnInit {
   }
 
   cancelar():void{
-   
+    this.cleanContact();
+    this.getAllContacts();
   }
 
  

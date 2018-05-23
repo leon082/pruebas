@@ -23,6 +23,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatIconModule} from '@angular/material/icon';
 
 //Services App
 import { ContactsService } from './Services/contacts.service';
@@ -60,7 +61,8 @@ import { NgHttpLoaderServicesModule } from 'ng-http-loader/services/ng-http-load
     MatListModule,
     MatButtonModule,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule
   ],
   providers: [
     ContactsService

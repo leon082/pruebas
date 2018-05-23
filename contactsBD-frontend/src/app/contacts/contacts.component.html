@@ -1,3 +1,4 @@
+
 <div #fields class="table-container bottom-spacer">
   <mat-list>
     <div class="container-fluid">
@@ -37,7 +38,7 @@
           <i class="fas fa-save"></i>
         </button>
 
-        <button *ngIf="isValidForm()"  mat-raised-button color="warn"class="color-green" (click)=" cleanContact()">Cancelar
+        <button *ngIf="isValidForm()"  mat-raised-button color="warn"class="color-green" (click)=" cancelar()">Cancelar
             <i class="fas fa-trash-alt"></i>
           </button>
 
@@ -110,9 +111,13 @@
 
       <mat-cell *matCellDef="let row">
         <div class="btn-group" role="group" aria-label="Basic example">
-          <button mat-raised-button color="primary" (click)="loadContact(row)">Editar
-            <i class="fas fa-edit"></i>
+          <button  class="mdl-button" mat-raised-button color="primary" (click)="loadContact(row)">Editar
+            <!--<i class="fas fa-edit"></i>-->
+            <i class="material-icons"></i>
+
           </button>
+
+
 
           <button mat-raised-button color="warn" (click)="deleteContact(row)" [(disabled)]="row.flag">Eliminar
             <i class="fas fa-trash-alt"></i>
