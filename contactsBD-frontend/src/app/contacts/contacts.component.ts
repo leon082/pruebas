@@ -157,6 +157,10 @@ export class ContactsComponent implements OnInit {
     row.flag=true;
   }
 
+  cancelar():void{
+   
+  }
+
  
   isDataEmpty(): boolean {
     return this.ELEMENT_DATA.length == 0;

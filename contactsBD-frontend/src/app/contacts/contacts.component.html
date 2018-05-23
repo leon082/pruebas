@@ -37,6 +37,10 @@
           <i class="fas fa-save"></i>
         </button>
 
+        <button *ngIf="isValidForm()"  mat-raised-button color="warn"class="color-green" (click)=" cleanContact()">Cancelar
+            <i class="fas fa-trash-alt"></i>
+          </button>
+
         <!--<mat-form-field class="col-md-4 margin-left-min"  >
                         <input matInput  #resultado  placeholder="Resultado" [(ngModel)]="result" disabled>                     
                       </mat-form-field>-->
