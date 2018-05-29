@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>PrimeFaces</title>
+            </f:facet>
+        </h:head>
+
+        <body>
+
+            <div >
+                <h:form id="forma">
+                    <p:growl id="grow" showDetail="true" life="5555"/>  
+
+                    <p:tabView id="tab">
+                        <p:tab title="Gestion Persona"> <!-- Nombre  -->
+                            <h:panelGrid columns="4" cellpadding="5">
+
+                                <p:outputLabel for="add_1" value="Nombres :" />
+                                <p:inputText   id="add_1" value="#{personaBean.persona.nombres}" required="true" requiredMessage="Valor Requerido"/>
+
+                                <p:outputLabel for="add_2" value="Apellidos :" />
+                                <p:inputText   id="add_2" value="#{personaBean.persona.apellidos}" required="true" requiredMessage="Valor Requerido"/>
+                                <p:outputLabel for="add_3" value="Ciudad :" />
+                                <p:selectOneMenu  id="add_3" value="#{personaBean.ciudadSelected}" required="true" requiredMessage="Valor Requerido">  
+                                    <f:selectItem itemLabel="Seleccione" itemValue="0" />  
+                                    <f:selectItem itemLabel="Cali" itemValue="1" />  
+                                    <f:selectItem itemLabel="Manizales" itemValue="2" />  
+
+                                </p:selectOneMenu>
+
+                            </h:panelGrid>
+                            <p:separator />
+
+                            <!-- Se actulizan los formularios  forma y forma2 para limpiar y mostrar cambios -->
+                            <p:commandButton 
+                                update=":forma:grow,:forma:tab:add_1,:forma:tab:add_2,,:forma:tab:add_3,:forma2:listaPersonas"
+                                ajax="true" value="Crear" action="#{personaBean.crearPersona()}"
+                                />
+                        </p:tab>
+
+                    </p:tabView>
+
+                </h:form>
+
+                <h:form id="forma2">
+                    <p:dataTable id="listaPersonas" value="#{personaBean.listPersonas}"
+                                 var="persona" 
+                                 paginator="true" 
+                                 rows="20" 
+                                 editable="true"
+                                 paginatorPosition="bottom"
+                                 >
+
+                        <p:ajax event="rowEdit" listener="#{personaBean.modificar}" update=":forma:grow" />
+
+                        <p:column headerText="Codigo Persona">
+                            <p:outputLabel value="#{persona.id}"></p:outputLabel>
+                        </p:column>
+
+                        <p:column  headerText="Nombres ">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{persona.nombres}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:inputText id="modelnombres" value="#{persona.nombres}" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Apellidos">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{persona.apellidos}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:inputText id="modelApellidos" value="#{persona.apellidos}" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Ciudad">
+                            <p:cellEditor>
+                                <f:facet name="output">
+
+                                    <p:selectOneMenu   value="#{persona.ciudad}" disabled="true" editable="false">  
+                                        <f:selectItem itemLabel="Seleccione" itemValue="0" />  
+                                        <f:selectItem itemLabel="Cali" itemValue="1" />  
+                                        <f:selectItem itemLabel="Manizales" itemValue="2" />  
+
+                                    </p:selectOneMenu>
+                                </f:facet>
+                                <f:facet name="input">
+
+                                    <p:selectOneMenu   value="#{persona.ciudad}" required="true" requiredMessage="Valor Requerido">  
+                                        <f:selectItem itemLabel="Seleccione" itemValue="0" />  
+                                        <f:selectItem itemLabel="Cali" itemValue="1" />  
+                                        <f:selectItem itemLabel="Manizales" itemValue="2" />
+                                    </p:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <!-- Editar -->
+                        <p:column style="width:30px">
+                            <p:rowEditor />
+                        </p:column>
+                        <!-- Borrar -->
+                        <p:column headerText="" style="width:30px" >
+                            <p:commandButton 
+                                update=":forma:grow,:forma2:listaPersonas"
+                                ajax="true" icon="ui-icon-trash"
+                                action="#{personaBean.eliminar(persona.id)}" />
+                        </p:column> 
+
+                    </p:dataTable>
+
+                </h:form>  
+            </div>
+
+
+        </body>
+
+    </f:view>
+</html>
+
