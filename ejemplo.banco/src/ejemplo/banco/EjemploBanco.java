@@ -35,6 +35,9 @@ public class EjemploBanco {
         }
 
         //Punto a
+        /*
+        Todos los nombres de los clientes que tiene el banco
+        */
         System.out.println("Se imprime punto a -->");
         for (int i = 0; i < banco.obtNumClientes(); i++) {
 
@@ -43,6 +46,9 @@ public class EjemploBanco {
         }
 
         //Punto b
+        /*
+        Todos los nombres y cedulas de las personas clientes del banco
+        */
         System.out.println("Se imprime punto b -->");
         for (int i = 0; i < banco.obtNumClientes(); i++) {
             
@@ -54,6 +60,9 @@ public class EjemploBanco {
         }
         
          //Punto c
+         /*
+         El nombre y representante de cada Empresa cliente del banco
+         */
         System.out.println("Se imprime punto c -->");
         for (int i = 0; i < banco.obtNumClientes(); i++) {
             
@@ -67,6 +76,9 @@ public class EjemploBanco {
         
         
         //Punto d
+        /*
+        Nombres de los clientes menores de edad <18
+        */
         System.out.println("Se imprime punto d -->");
         for (int i = 0; i < banco.obtNumClientes(); i++) {
             
@@ -81,6 +93,9 @@ public class EjemploBanco {
         }
         
          //Punto e
+         /*
+         Nombre y edad del cliente mas joven
+         */
         System.out.println("Se imprime punto e -->");
         int edadMasJoven=0;
         String nombreJoven="";
@@ -108,6 +123,9 @@ public class EjemploBanco {
         
         
         //Punto f
+        /*
+        Nombre y edad del cliente mas viejo
+        */
         System.out.println("Se imprime punto f -->");
         int edadMasViejo=0;
         String nombreViejo="";

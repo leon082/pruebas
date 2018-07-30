@@ -27,6 +27,7 @@ public class Empresa extends Cliente {
 
     public String obtRepresentante() {
         return representante;
+        
     }
 
     public void cambiarRepres(String repres) {
